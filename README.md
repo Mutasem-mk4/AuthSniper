@@ -10,8 +10,8 @@
   <a href="https://golang.org/">
     <img src="https://img.shields.io/badge/Language-Go-blue.svg">
   </a>
-  <a href="https://github.com/mutasem_mk4/AuthSniper/issues">
-    <img src="https://img.shields.io/github/issues/mutasem_mk4/AuthSniper">
+  <a href="https://github.com/Mutasem-mk4/AuthSniper/issues">
+    <img src="https://img.shields.io/github/issues/Mutasem-mk4/AuthSniper">
   </a>
   <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-green.svg">
@@ -46,7 +46,7 @@ Unlike legacy tools that rely on naive string-length comparisons (generating mas
 Ensure you have [Go](https://golang.org/) installed, then run:
 
 ```bash
-git clone https://github.com/mutasem_mk4/AuthSniper.git
+git clone https://github.com/Mutasem-mk4/AuthSniper.git
 cd AuthSniper
 go build -o authsniper ./cmd/authsniper/main.go
 ```
@@ -92,4 +92,4 @@ AuthSniper realizes the underlying structure is an exact **100% match**, proving
 
 ## 📜 License
 
-MIT License - Copyright (c) 2026 mutasem_mk4
+MIT License - Copyright (c) 2026 Mutasem-mk4

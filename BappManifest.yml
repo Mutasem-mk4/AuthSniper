@@ -1,0 +1,8 @@
+Name: AuthSniper
+SerialVersion: 1
+MinPlatformVersion: 0
+ExtensionType: 2
+Author: Mutasem-mk4
+ShortDescription: The Ultimate AST-Driven API BOLA/IDOR Hunter with zero-false-positive filtering.
+EntryPoint: extensions/burp/AuthSniper-Native.py
+BuildCommand: 

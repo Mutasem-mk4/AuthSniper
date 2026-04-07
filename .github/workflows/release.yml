@@ -1,0 +1,33 @@
+name: Release AuthSniper
+
+on:
+  push:
+    tags:
+      - '*' # Triggers automatically when you push a new version tag (e.g., v1.0.0)
+
+permissions:
+  contents: write
+
+jobs:
+  goreleaser:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Golang environment
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21' # Standard robust version
+
+      - name: Run GoReleaser (Cross-Compile & Publish)
+        uses: goreleaser/goreleaser-action@v5
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --clean
+        env:
+          # Automatically uses GitHub's built-in token to upload releases
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

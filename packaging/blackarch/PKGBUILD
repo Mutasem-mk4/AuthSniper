@@ -1,0 +1,39 @@
+# Maintainer: Mutasem-mk4 <your-email@example.com>
+pkgname=authsniper
+pkgver=1.0.1
+pkgrel=1
+pkgdesc="The Ultimate AST-Driven API BOLA/IDOR Hunter"
+arch=('x86_64' 'aarch64' 'i686')
+url="https://github.com/Mutasem-mk4/AuthSniper"
+license=('MIT') # Adjust if you pick a different license
+depends=('glibc')
+makedepends=('go')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/Mutasem-mk4/AuthSniper/archive/refs/tags/v$pkgver.tar.gz")
+sha256sums=('SKIP') # Use `updpkgsums` to generate the exact hash before PR
+
+build() {
+  cd "$srcdir/AuthSniper-$pkgver"
+  
+  # Set security flags for Arch packaging
+  export CGO_CPPFLAGS="${CPPFLAGS}"
+  export CGO_CFLAGS="${CFLAGS}"
+  export CGO_CXXFLAGS="${CXXFLAGS}"
+  export CGO_LDFLAGS="${LDFLAGS}"
+  export GOFLAGS="-buildmode=pie -trimpath -mod=readonly -modcacherw"
+  
+  # Compile the binary
+  go build -o authsniper ./cmd/authsniper/main.go
+}
+
+package() {
+  cd "$srcdir/AuthSniper-$pkgver"
+  
+  # Install the main Go CLI binary
+  install -Dm755 authsniper "$pkgdir/usr/bin/authsniper"
+  
+  # Install the Burp Suite Extension script
+  install -Dm644 extensions/burp/AuthSniper.py "$pkgdir/usr/share/$pkgname/AuthSniper.py"
+  
+  # Install Documentation
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

@@ -3,6 +3,7 @@ package analyzer
 import (
 	"encoding/json"
 	"reflect"
+	"strings"
 )
 
 // Compare analyzes the differences between UserA, UserB, and Unauthenticated.
@@ -24,6 +25,11 @@ func Compare(respA, respB, respU []byte, codeA, codeB, codeU int) (bool, float64
 		if string(respA) == string(respB) && string(respA) != string(respU) {
 			return true, 1.0
 		}
+		return false, 0.0
+	}
+
+	// Filter identical 200 OK generic errors before running AST
+	if isGenericError(jsonA) {
 		return false, 0.0
 	}
 
@@ -73,4 +79,39 @@ func getStructure(v interface{}) interface{} {
 	default:
 		return "NULL"
 	}
+}
+
+// isGenericError checks if a parsed JSON response represents a generic failure despite the HTTP 200 Code
+func isGenericError(v interface{}) bool {
+	val, ok := v.(map[string]interface{})
+	if !ok {
+		return false
+	}
+
+	if _, hasError := val["error"]; hasError {
+		return true
+	}
+	if _, hasErrors := val["errors"]; hasErrors {
+		return true
+	}
+
+	if status, hasStatus := val["status"]; hasStatus {
+		if s, ok := status.(string); ok && (s == "error" || s == "fail" || s == "false") {
+			return true
+		}
+		if b, ok := status.(bool); ok && !b {
+			return true
+		}
+	}
+
+	if msg, hasMsg := val["message"]; hasMsg {
+		if s, ok := msg.(string); ok {
+			s = strings.ToLower(s)
+			if strings.Contains(s, "unauthorized") || strings.Contains(s, "forbidden") {
+				return true
+			}
+		}
+	}
+
+	return false
 }

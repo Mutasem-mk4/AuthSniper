@@ -93,3 +93,11 @@ AuthSniper realizes the underlying structure is an exact **100% match**, proving
 ## 📜 License
 
 MIT License - Copyright (c) 2026 Mutasem-mk4
+
+---
+
+## About the Author
+
+**Developed by [Mutasem Kharma](https://github.com/Mutasem-mk4)**, a Security Engineer and Open-Source Toolsmith specializing in eBPF, AI-powered security frameworks, and autonomous vulnerability hunting. 
+
+Explore more projects and technical deep-dives at **[mutasem-portfolio.vercel.app](https://mutasem-portfolio.vercel.app/)**.

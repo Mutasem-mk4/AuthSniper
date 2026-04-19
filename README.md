@@ -76,7 +76,7 @@ Specify the number of concurrent workers `-c` and stream the results to a file f
 | `-c` | Number of concurrent workers (Default: 10) |
 | `-o` | Output file for confirmed vulnerabilities (JSONL) |
 
-## 🧠 The AST Engine (Why AuthSniper?)
+## 🧠 The AST Engine (Why AuthSniper-)
 
 When dealing with modern APIs, dynamic noise (timestamps, CSRF tokens, changing IDs) ruins length-based BOLA scanners. 
 
